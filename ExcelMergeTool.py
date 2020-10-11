@@ -170,7 +170,7 @@ class WorkThread(Thread):
                     return
 
                 print(os.path.join(root, file))
-                if os.path.splitext(file)[-1] != '.xlsx':
+                if os.path.splitext(file)[-1] != '.xlsx' and os.path.splitext(file)[-1] != '.xls' and os.path.splitext(file)[-1] != '.xlsm':
                     print('不支持的文件:', os.path.join(root, file))
                     logger.info('不支持的文件:' + os.path.join(root, file))
                     continue
@@ -348,8 +348,9 @@ if __name__ == '__test__':
     for root, dirs, files in os.walk(indir):
         for file in files:
             print(os.path.join(root, file))
-            if os.path.splitext(file)[-1] != '.xlsx':
+            if os.path.splitext(file)[-1] != '.xlsx' and os.path.splitext(file)[-1] != '.xls':
                 print('不支持的文件:', os.path.join(root, file))
+                logger.warning('不支持的文件:' + os.path.join(root, file))
                 continue
             filename_excel.append(os.path.join(root, file))
             # excel转换成DataFrame
